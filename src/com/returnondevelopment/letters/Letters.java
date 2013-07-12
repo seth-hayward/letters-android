@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
@@ -169,10 +170,36 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_letters_dummy,
 					container, false);
-			TextView dummyTextView = (TextView) rootView
-					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+			
+			WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
+			
+			String base_url = "http://www.letterstocrushes.com/mobile/";
+			String extension = "";
+			
+			switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
+			case 1:
+				// home
+				extension = "";
+				break;
+			case 2:
+				// more
+				extension = "more";
+				break;
+			case 3:
+				extension = "bookmarks";
+				break;
+			case 4:
+				extension = "search";
+				break;
+			case 5:
+				extension = "more";
+				break;
+			
+			}
+			
+			dummyWebView.getSettings().setJavaScriptEnabled(true);
+			dummyWebView.loadUrl(base_url + extension);
+						
 			return rootView;
 		}
 	}
