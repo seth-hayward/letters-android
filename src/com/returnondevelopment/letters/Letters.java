@@ -126,8 +126,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			// Show 5 total pages.
+			return 5;
 		}
 
 		@Override
@@ -135,11 +135,16 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.title_home).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
+				return getString(R.string.title_more).toUpperCase(l);
 			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.title_bookmarks).toUpperCase(l);
+			case 3:
+				return getString(R.string.title_search).toUpperCase(l);
+			case 4:
+				return getString(R.string.title_send).toUpperCase(l);
+				
 			}
 			return null;
 		}
