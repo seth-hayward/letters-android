@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
@@ -198,10 +199,23 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 			}
 			
 			dummyWebView.getSettings().setJavaScriptEnabled(true);
+
+			dummyWebView.setWebViewClient(new Callback()); 
 			dummyWebView.loadUrl(base_url + extension);
 						
 			return rootView;
 		}
+		
+
+	    private class Callback extends WebViewClient{ 
+
+	        @Override
+	        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+	            return (false);
+	        }
+
+	    }		
+		
 	}
 
 }
