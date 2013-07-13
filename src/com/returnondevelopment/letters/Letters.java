@@ -24,25 +24,10 @@ import android.widget.TextView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a
-	 * {@link android.support.v4.app.FragmentPagerAdapter} derivative, which
-	 * will keep every loaded fragment in memory. If this becomes too memory
-	 * intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
-//	SectionsPagerAdapter mSectionsPagerAdapter;
-
 	static final int ITEMS = 10;
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	
-	/**
-	 * The {@link ViewPager} that will host the section contents.
-	 */
-//	ViewPager mViewPager;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -59,9 +44,9 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
 		
 		
-//		// When swiping between different sections, select the corresponding
-//		// tab. We can also use ActionBar.Tab#select() to do this if we have
-//		// a reference to the Tab.
+		// When swiping between different sections, select the corresponding
+		// tab. We can also use ActionBar.Tab#select() to do this if we have
+		// a reference to the Tab.
 		mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
 					@Override
 					public void onPageSelected(int position) {
@@ -80,7 +65,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 					.setTabListener(this));
 		}
 	}
-
 
 	public String getPageTitle(int position) {
 		Locale l = Locale.getDefault();
@@ -146,54 +130,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 						
 	}
 	
-	/**
-	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-	 * one of the sections/tabs/pages.
-	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
-		public SectionsPagerAdapter(FragmentManager fm) {
-			super(fm);
-		}
-
-		@Override
-		public Fragment getItem(int position) {
-			// getItem is called to instantiate the fragment for the given page.
-			// Return a DummySectionFragment (defined as a static inner class
-			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
-		}
-
-		@Override
-		public int getCount() {
-			// Show 5 total pages.
-			return 5;
-		}
-
-		@Override
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_home).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_more).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_bookmarks).toUpperCase(l);
-			case 3:
-				return getString(R.string.title_search).toUpperCase(l);
-			case 4:
-				return getString(R.string.title_send).toUpperCase(l);
-				
-			}
-			return null;
-		}
-	}
-
 	/**
 	 * A dummy fragment representing a section of the app, but that simply
 	 * displays dummy text.
