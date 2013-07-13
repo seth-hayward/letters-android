@@ -29,7 +29,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
 	static final int ITEMS = 10;
 	MyAdapter mAdapter;
-	CustomViewPager mPager;
+	ViewPager mPager;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,15 +37,14 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 		setContentView(R.layout.activity_letters);
 
 		mAdapter = new MyAdapter(getSupportFragmentManager());		
-		mPager = (CustomViewPager)findViewById(R.id.pager);
+		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
-		
-		
+				
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-		mPager.setPagingEnabled(false);
+//		mPager.setPagingEnabled(false);
 		
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -216,38 +215,5 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	    }		
 		
 	}
-	
-	public class CustomViewPager extends ViewPager {
-
-		 private boolean enabled;
-
-		    public CustomViewPager(Context context, AttributeSet attrs) {
-		        super(context, attrs);
-		        this.enabled = true;
-		    }
-
-		    @Override
-		    public boolean onTouchEvent(MotionEvent event) {
-		        if (this.enabled) {
-		            return super.onTouchEvent(event);
-		        }
-		  
-		        return false;
-		    }
-
-		    @Override
-		    public boolean onInterceptTouchEvent(MotionEvent event) {
-		        if (this.enabled) {
-		            return super.onInterceptTouchEvent(event);
-		        }
-		 
-		        return false;
-		    }
-		 
-		    public void setPagingEnabled(boolean enabled) {
-		        this.enabled = enabled;
-		    }
-
-	}
-
+		
 }
