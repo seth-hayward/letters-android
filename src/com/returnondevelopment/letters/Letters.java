@@ -69,20 +69,20 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	}
 
 	public String getPageTitle(int position) {
-		Locale l = Locale.getDefault();
-		switch (position) {
-		case 0:
-			return getString(R.string.title_home).toUpperCase(l);
-		case 1:
-			return getString(R.string.title_more).toUpperCase(l);
-		case 2:
-			return getString(R.string.title_bookmarks).toUpperCase(l);
-		case 3:
-			return getString(R.string.title_search).toUpperCase(l);
-		case 4:
-			return getString(R.string.title_send).toUpperCase(l);			
-		}
-		return null;
+//		Locale l = Locale.getDefault();
+//		switch (position) {
+//		case 0:
+//			return getString(R.string.title_home).toUpperCase(l);
+//		case 1:
+//			return getString(R.string.title_more).toUpperCase(l);
+//		case 2:
+//			return getString(R.string.title_bookmarks).toUpperCase(l);
+//		case 3:
+//			return getString(R.string.title_search).toUpperCase(l);
+//		case 4:
+//			return getString(R.string.title_send).toUpperCase(l);			
+//		}
+		return "Page " + position;
 	}			
 	
 	@Override
@@ -177,6 +177,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				break;
 			
 			}
+			
+			extension = "page/" + getArguments().getInt(ARG_SECTION_NUMBER);
 			
 			dummyWebView.getSettings().setJavaScriptEnabled(true);
 
