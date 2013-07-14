@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -42,9 +43,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-//		mPager.setPagingEnabled(false);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		
 		// When swiping between different sections, select the corresponding
 		// tab. We can also use ActionBar.Tab#select() to do this if we have
@@ -57,7 +56,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				});
 
 		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 3; i++) {
 			// Create a tab with text corresponding to the page title defined by
 			// the adapter. Also specify this Activity object, which implements
 			// the TabListener interface, as the callback (listener) for when
@@ -69,20 +68,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	}
 
 	public String getPageTitle(int position) {
-//		Locale l = Locale.getDefault();
-//		switch (position) {
-//		case 0:
-//			return getString(R.string.title_home).toUpperCase(l);
-//		case 1:
-//			return getString(R.string.title_more).toUpperCase(l);
-//		case 2:
-//			return getString(R.string.title_bookmarks).toUpperCase(l);
-//		case 3:
-//			return getString(R.string.title_search).toUpperCase(l);
-//		case 4:
-//			return getString(R.string.title_send).toUpperCase(l);			
-//		}
-		return "Page " + position;
+		int page = position + 1;		
+		return "Page " + page;
 	}			
 	
 	@Override
@@ -182,6 +169,9 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 			
 			dummyWebView.getSettings().setJavaScriptEnabled(true);
 
+			WebSettings dummySettings = dummyWebView.getSettings();
+
+			dummySettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 			dummyWebView.setWebViewClient(new Callback()); 
 			dummyWebView.loadUrl(base_url + extension);
 						
