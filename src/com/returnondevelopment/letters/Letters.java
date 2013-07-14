@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
@@ -63,24 +65,27 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle item selection
-
-		// 1. Instantiate an AlertDialog.Builder with its constructor
-		AlertDialog.Builder builder = new AlertDialog.Builder(Letters.this);
-
-		// 2. Chain together various setter methods to set the dialog characteristics
-		builder.setMessage("Clicked")
-		       .setTitle("title");
-
-		// 3. Get the AlertDialog from create()
-		AlertDialog dialog = builder.create();
-		
-		dialog.show();
-		
+				
+		View rootView = mPager.getRootView();		
+		WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
+				
 	    switch (item.getItemId()) {
 	        case R.id.action_home:	        	
+	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        	
 	            return true;
 	        case R.id.action_more:
+	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
 	            return true;
+	        case R.id.action_bookmarks:
+	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
+	            return true;
+	        case R.id.action_search:
+	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
+	            return true;
+	            
+	        case R.id.action_send:
+	        	// switch to the send screen...
+	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);	            
 	            	            
