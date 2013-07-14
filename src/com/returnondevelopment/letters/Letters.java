@@ -1,18 +1,16 @@
 package com.returnondevelopment.letters;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuItem;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
-	static final int ITEMS = 3;
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	
@@ -61,26 +59,32 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 			FragmentTransaction fragmentTransaction) {
 	}
 
-	
-	public static class MyAdapter extends FragmentStatePagerAdapter {
-		public MyAdapter(FragmentManager fragmentManager) {
-			super(fragmentManager);
-		}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+
+		// 1. Instantiate an AlertDialog.Builder with its constructor
+		AlertDialog.Builder builder = new AlertDialog.Builder(Letters.this);
+
+		// 2. Chain together various setter methods to set the dialog characteristics
+		builder.setMessage("Clicked")
+		       .setTitle("title");
+
+		// 3. Get the AlertDialog from create()
+		AlertDialog dialog = builder.create();
 		
-		@Override
-		public int getCount() {
-			return ITEMS;			
-		}
+		dialog.show();
 		
-		@Override
-		public Fragment getItem(int position) {
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);									
-			return fragment;
-		}
-						
-	}
-	
+	    switch (item.getItemId()) {
+	        case R.id.action_home:	        	
+	            return true;
+	        case R.id.action_more:
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);	            
+	            	            
+	    }
+	}	
+		
 }
