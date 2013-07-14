@@ -28,7 +28,7 @@ import android.widget.TextView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
-	static final int ITEMS = 10;
+	static final int ITEMS = 3;
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	
@@ -45,26 +45,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 		
-		// When swiping between different sections, select the corresponding
-		// tab. We can also use ActionBar.Tab#select() to do this if we have
-		// a reference to the Tab.
-		mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-					@Override
-					public void onPageSelected(int position) {
-						actionBar.setSelectedNavigationItem(position);
-					}
-				});
-
-		// For each of the sections in the app, add a tab to the action bar.
-		for (int i = 0; i < 3; i++) {
-			// Create a tab with text corresponding to the page title defined by
-			// the adapter. Also specify this Activity object, which implements
-			// the TabListener interface, as the callback (listener) for when
-			// this tab is selected.
-			actionBar.addTab(actionBar.newTab()
-					.setText(getPageTitle(i))
-					.setTabListener(this));
-		}
 	}
 
 	public String getPageTitle(int position) {
@@ -119,93 +99,4 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 						
 	}
 	
-	/**
-	 * A dummy fragment representing a section of the app, but that simply
-	 * displays dummy text.
-	 */
-	public static class DummySectionFragment extends Fragment {
-		/**
-		 * The fragment argument representing the section number for this
-		 * fragment.
-		 */
-		public static final String ARG_SECTION_NUMBER = "section_number";
-
-		public DummySectionFragment() {
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_letters_dummy,
-					container, false);
-			
-			WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
-			
-			String base_url = "http://www.letterstocrushes.com/mobile/";
-			String extension = "";
-			
-			switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-			case 1:
-				// home
-				extension = "";
-				break;
-			case 2:
-				// more
-				extension = "more";
-				break;
-			case 3:
-				extension = "bookmarks";
-				break;
-			case 4:
-				extension = "search";
-				break;
-			case 5:
-				extension = "more";
-				break;
-			
-			}
-			
-			extension = "page/" + getArguments().getInt(ARG_SECTION_NUMBER);
-			
-			dummyWebView.getSettings().setJavaScriptEnabled(true);
-
-			WebSettings dummySettings = dummyWebView.getSettings();
-
-			dummySettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
-			dummyWebView.setWebViewClient(new Callback()); 
-			dummyWebView.loadUrl(base_url + extension);
-						
-			return rootView;
-		}
-
-		public CharSequence getPageTitle(int position) {
-			Locale l = Locale.getDefault();
-			switch (position) {
-			case 0:
-				return getString(R.string.title_home).toUpperCase(l);
-			case 1:
-				return getString(R.string.title_more).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_bookmarks).toUpperCase(l);
-			case 3:
-				return getString(R.string.title_search).toUpperCase(l);
-			case 4:
-				return getString(R.string.title_send).toUpperCase(l);
-				
-			}
-			return null;
-		}		
-				
-
-	    private class Callback extends WebViewClient{ 
-
-	        @Override
-	        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-	            return (false);
-	        }
-
-	    }		
-		
-	}
-		
 }
