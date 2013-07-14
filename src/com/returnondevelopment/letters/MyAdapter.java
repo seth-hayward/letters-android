@@ -26,6 +26,5 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 		fragment.setArguments(args);									
 		return fragment;
 	}
-					
 }
 
