@@ -13,8 +13,10 @@ import android.webkit.WebView;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener {
 
+	private Menu _menu;
 	MyAdapter mAdapter;
 	ViewPager mPager;
+	int selected_id = R.id.action_home;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.letters, menu);
+		_menu = menu;
 		return true;
 	}
 
@@ -61,6 +64,16 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 			FragmentTransaction fragmentTransaction) {
 	}
 
+	
+	@Override
+	public boolean onPrepareOptionsMenu (Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+	
+		// could change menu items here if i desired, 
+		// but since i can't change the icon, not going
+		// to go this route
+		return true;
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -71,7 +84,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				
 	    switch (item.getItemId()) {
 	        case R.id.action_home:	        	
-	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        	
+	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
 	            return true;
 	        case R.id.action_more:
 	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
@@ -81,8 +94,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	            return true;
 	        case R.id.action_search:
 	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
-	            return true;
-	            
+	            return true;	            
 	        case R.id.action_send:
 	        	// switch to the send screen...
 	        	return true;
