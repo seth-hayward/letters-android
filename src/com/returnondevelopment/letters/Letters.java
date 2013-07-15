@@ -8,19 +8,16 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
-import android.widget.SpinnerAdapter;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener {
 
 	MyAdapter mAdapter;
 	ViewPager mPager;
-	int selected_id = R.id.action_home;
+	int selected_id = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +46,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 						View rootView = mPager.getRootView();		
 						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
 								
+						selected_id = spinner_position;
+						
 					    switch (spinner_position) {
 					        case 0:	        	
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
@@ -87,7 +86,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		getMenuInflater().inflate(R.menu.letters, menu);
 		
 		
-		_menu = menu;
 		return true;
 	}
 
@@ -118,35 +116,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		// but since i can't change the icon, not going
 		// to go this route
 		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-				
-		View rootView = mPager.getRootView();		
-		WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
-				
-	    switch (item.getItemId()) {
-	        case R.id.action_home:	        	
-	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
-	            return true;
-	        case R.id.action_more:
-	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
-	            return true;
-	        case R.id.action_bookmarks:
-	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
-	            return true;
-	        case R.id.action_search:
-	        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
-	            return true;	            
-	        case R.id.action_send:
-	        	// switch to the send screen...
-	        	return true;
-	        default:
-	            return super.onOptionsItemSelected(item);	            
-	            	            
-	    }
 	}
 
 	@Override
