@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
@@ -16,7 +17,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	int selected_id = 0;
-	
+	String current_page = "";
+	int current_page_number = 1;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +44,31 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 						View rootView = mPager.getRootView();		
 						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
 												
-						selected_id = spinner_position;
+						current_page_number = 1;
 																		
 					    switch (spinner_position) {
 					        case 0:	        	
-					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
-					            return true;
+					        	current_page = "";
+					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		  
+					        	break;
 					        case 1:
+					        	current_page = "more";					        	
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
-					            return true;
+					        	break;
 					        case 2:
+					        	current_page = "bookmarks";					        	
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
-					            return true;
+					        	break;
 					        case 3:
+					        	current_page = "search";
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
-					            return true;	            
+					        	break;
 					        case 4:
 					        	// switch to the send screen...
-					        	return true;					            	            					            
 					    }
 					    
+					    Log.d("CurrentPage", current_page + " - " + Integer.toString(spinner_position));
+
 					    return true;
 												
 					}
