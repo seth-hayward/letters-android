@@ -1,7 +1,5 @@
 package com.returnondevelopment.letters;
 
-import java.util.ArrayList;
-
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.FragmentTransaction;
@@ -14,10 +12,11 @@ import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener {
-
+	
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	int selected_id = 0;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,20 +33,17 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	    	    
 	    ArrayAdapter<CharSequence> dropDownAdapter = ArrayAdapter.createFromResource(this, R.array.action_list, android.R.layout.simple_list_item_1);
 	    
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);    
-
 		actionBar.setListNavigationCallbacks(dropDownAdapter, 
 				new OnNavigationListener() {
 
 					@Override
 					public boolean onNavigationItemSelected(int spinner_position, long arg1) {
-						// TODO Auto-generated method stub
 												
 						View rootView = mPager.getRootView();		
 						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
 												
 						selected_id = spinner_position;
-												
+																		
 					    switch (spinner_position) {
 					        case 0:	        	
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
@@ -74,18 +70,11 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 			});
 			    
 	}
-
-	public String getPageTitle(int position) {
-		int page = position + 1;		
-		return "Page " + page;
-	}			
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.letters, menu);
-		
-		
+		getMenuInflater().inflate(R.menu.letters, menu);		
 		return true;
 	}
 
@@ -120,8 +109,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 
 	@Override
 	public boolean onNavigationItemSelected(int arg0, long arg1) {
-		// TODO Auto-generated method stub
 		return false;
-	}	
+	}
 		
 }

@@ -1,5 +1,6 @@
 package com.returnondevelopment.letters;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,7 +23,15 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	public Fragment getItem(int position) {
 		Fragment fragment = new DummySectionFragment();
 		Bundle args = new Bundle();
-		args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+		
+		//
+		// hok, can i somehow get the action bar from here?
+		//
+
+		
+
+		
+		args.putInt(DummySectionFragment.current_page, position + 1);
 		fragment.setArguments(args);									
 		return fragment;
 	}

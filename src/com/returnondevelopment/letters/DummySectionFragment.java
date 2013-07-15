@@ -16,13 +16,15 @@ import android.support.v4.app.Fragment;
  * A dummy fragment representing a section of the app, but that simply
  * displays dummy text.
  */
-public class DummySectionFragment extends Fragment {
+public class DummySectionFragment extends Fragment
+{
 	/**
 	 * The fragment argument representing the section number for this
 	 * fragment.
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
-	public static String current_page;
+	public static String current_page = "";
+	public static int current_page_number = 1;
 
 	public DummySectionFragment() {
 	}
@@ -38,30 +40,7 @@ public class DummySectionFragment extends Fragment {
 		String base_url = "http://www.letterstocrushes.com/mobile/";
 		String extension = "";
 		
-		Log.d("ARG_SECTION_NUMBER", Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
-		
-		switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-		case 1:
-			// home
-			extension = "";
-			break;
-		case 2:
-			// more
-			extension = "more";
-			break;
-		case 3:
-			extension = "bookmarks";
-			break;
-		case 4:
-			extension = "search";
-			break;
-		case 5:
-			extension = "more";
-			break;
-		
-		}
-		
-		extension = "page/" + getArguments().getInt(ARG_SECTION_NUMBER);
+		extension = "page/" + Integer.toString(current_page_number);
 		
 		dummyWebView.getSettings().setJavaScriptEnabled(true);
 
@@ -100,8 +79,8 @@ public class DummySectionFragment extends Fragment {
             return (false);
         }
 
-    }		
-	
+    }
+
 }
 	
 
