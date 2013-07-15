@@ -3,6 +3,7 @@ package com.returnondevelopment.letters;
 import java.util.Locale;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class DummySectionFragment extends Fragment {
 	 * fragment.
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
+	public static String current_page;
 
 	public DummySectionFragment() {
 	}
@@ -35,6 +37,8 @@ public class DummySectionFragment extends Fragment {
 		
 		String base_url = "http://www.letterstocrushes.com/mobile/";
 		String extension = "";
+		
+		Log.d("ARG_SECTION_NUMBER", Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
 		
 		switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
 		case 1:

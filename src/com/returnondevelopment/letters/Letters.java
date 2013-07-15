@@ -45,9 +45,9 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 												
 						View rootView = mPager.getRootView();		
 						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
-								
+												
 						selected_id = spinner_position;
-						
+												
 					    switch (spinner_position) {
 					        case 0:	        	
 					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		        	
