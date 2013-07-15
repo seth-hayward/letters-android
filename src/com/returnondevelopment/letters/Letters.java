@@ -1,5 +1,7 @@
 package com.returnondevelopment.letters;
 
+import java.util.ArrayList;
+
 import android.app.ActionBar;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
@@ -37,23 +39,24 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 				
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);    
+	    	    
+	    ArrayAdapter<CharSequence> dropDownAdapter = ArrayAdapter.createFromResource(this, R.array.action_list, android.R.layout.simple_list_item_1);
+	    
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);    
 
-		String colors[] = {"Red","Blue","White","Yellow"};
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colors);
-        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view		
+		actionBar.setListNavigationCallbacks(dropDownAdapter, 
+				new OnNavigationListener() {
 
-		
-		// Specify a SpinnerAdapter to populate the dropdown list.
-	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(actionBar.getThemedContext(),
-	        android.R.layout.simple_spinner_item, R.id.planets_spinner,
-	        colors);
-
-	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-	    // Set up the dropdown list navigation in the action bar.
-	    actionBar.setListNavigationCallbacks(adapter, this);
-		
+					@Override
+					public boolean onNavigationItemSelected(int arg0, long arg1) {
+						// TODO Auto-generated method stub
+						return true;
+					}
+			
+				
+			});
+			    
 	}
 
 	public String getPageTitle(int position) {
