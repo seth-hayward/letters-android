@@ -8,5 +8,9 @@
     <string name="title_bookmarks">bookmarks</string>
     <string name="title_search">search</string>
     <string name="title_send">send</string>
-
+    <string-array name="action_list">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+    </string-array>
 </resources>

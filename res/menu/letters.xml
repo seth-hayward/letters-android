@@ -1,5 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <Spinner
+        android:id="@+id/planets_spinner"
+		android:showAsAction="always"
+    	android:orderInCategory="1"
+    	android:actionViewClass="android.widget.Spinner"
+     />
+
     <item
         android:id="@+id/action_home"
         android:orderInCategory="10"

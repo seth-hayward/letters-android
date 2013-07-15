@@ -1,6 +1,7 @@
 package com.returnondevelopment.letters;
 
 import android.app.ActionBar;
+import android.app.ActionBar.OnNavigationListener;
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -10,10 +11,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
-public class Letters extends FragmentActivity implements ActionBar.TabListener {
+public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener {
 
+	private MenuItem mSpinnerItem1 = null;	
 	private Menu _menu;
+	private SpinnerAdapter mSpinnerAdapter;
 	MyAdapter mAdapter;
 	ViewPager mPager;
 	int selected_id = R.id.action_home;
@@ -29,7 +37,22 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 				
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+
+		String colors[] = {"Red","Blue","White","Yellow"};
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, colors);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view		
+
+		
+		// Specify a SpinnerAdapter to populate the dropdown list.
+	    ArrayAdapter<String> adapter = new ArrayAdapter<String>(actionBar.getThemedContext(),
+	        android.R.layout.simple_spinner_item, R.id.planets_spinner,
+	        colors);
+
+	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+	    // Set up the dropdown list navigation in the action bar.
+	    actionBar.setListNavigationCallbacks(adapter, this);
 		
 	}
 
@@ -42,6 +65,41 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.letters, menu);
+		
+		//Spinner s = (Spinner) menu.findItem(R.id.planets_spinner).getActionView(); // find the spinner
+		//mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.action_list, android.R.layout.simple_spinner_dropdown_item); //  create the adapter from a StringArray
+		//s.setAdapter(mSpinnerAdapter); // set the adapter
+		//s.setOnItemSelectedListener(myChangeListener); // (optional) reference to a OnItemSelectedListener, that you can use to perform actions based on user selec
+
+        
+        
+//		   mSpinnerItem1 = menu.findItem( R.id.planets_spinner);
+//		    View view1 = mSpinnerItem1.getActionView();
+//		    if (view1 instanceof Spinner)
+//		    {
+//		        final Spinner spinner = (Spinner) view1;
+//		        
+
+//		        spinner.setAdapter(spinnerArrayAdapter);
+//		        spinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+//
+//		            @Override
+//		            public void onItemSelected(AdapterView<?> arg0, View arg1,
+//		                    int arg2, long arg3) {
+//		                // TODO Auto-generated method stub
+//
+//		            }
+//
+//		            @Override
+//		            public void onNothingSelected(AdapterView<?> arg0) {
+//		                // TODO Auto-generated method stub
+//
+//		            }
+//		        });
+//
+//		    }
+		
+		
 		_menu = menu;
 		return true;
 	}
@@ -102,6 +160,12 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener {
 	            return super.onOptionsItemSelected(item);	            
 	            	            
 	    }
+	}
+
+	@Override
+	public boolean onNavigationItemSelected(int arg0, long arg1) {
+		// TODO Auto-generated method stub
+		return false;
 	}	
 		
 }
