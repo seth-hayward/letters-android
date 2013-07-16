@@ -24,7 +24,7 @@ public class DummySectionFragment extends Fragment
 	 */
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	public static String current_page = "";
-	public static int current_page_number = 1;
+	public static int current_page_number;
 
 	public DummySectionFragment(String page, int page_number) {
 		current_page = page;
@@ -61,7 +61,7 @@ public class DummySectionFragment extends Fragment
 					
 		return rootView;
 	}
-
+	
 	public CharSequence getPageTitle(int position) {
 		Locale l = Locale.getDefault();
 		switch (position) {

@@ -11,6 +11,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	
 	static final int ITEMS = 100;
 	static String current_page = "";
+	static int current_page_number = -1;
 
 	public MyAdapter(FragmentManager fragmentManager, String page) {
 		super(fragmentManager);
@@ -25,8 +26,15 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public Fragment getItem(int position) {
 		Log.d("getItem", Integer.toString(position));
-		Fragment fragment = new DummySectionFragment(current_page, position + 1);
-		Bundle args = new Bundle();
+		
+		if(current_page_number == -1) {
+			// first load
+			current_page_number = 1;
+		} else {
+			current_page_number = position;			
+		}
+				
+		Fragment fragment = new DummySectionFragment(current_page, current_page_number);		
 		
 		//
 		// hok, can i somehow get the action bar from here?
