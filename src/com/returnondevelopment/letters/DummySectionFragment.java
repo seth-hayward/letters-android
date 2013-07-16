@@ -45,11 +45,11 @@ public class DummySectionFragment extends Fragment
 
 		String extension = "";
 		
-		if(current_page_number > 1) {
-			extension = "/page/" + Integer.toString(current_page_number);						
+		if(current_page == "more/" || current_page == "") {
+			extension = "page/" + Integer.toString(current_page_number);						
 		}
 						
-		Log.d("Extension", extension);
+		Log.d("Extension", base_url + extension);
 		
 		dummyWebView.getSettings().setJavaScriptEnabled(true);
 

@@ -24,8 +24,8 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	
 	@Override
 	public Fragment getItem(int position) {
-						
-		Fragment fragment = new DummySectionFragment(current_page, position);
+		Log.d("getItem", Integer.toString(position));
+		Fragment fragment = new DummySectionFragment(current_page, position + 1);
 		Bundle args = new Bundle();
 		
 		//

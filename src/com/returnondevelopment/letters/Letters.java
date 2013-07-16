@@ -52,7 +52,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 //				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		  
 				        	break;
 				        case 1:
-				        	current_page = "more";					        	
+				        	current_page = "more/";					        	
 //				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
 				        	break;
 				        case 2:
@@ -67,7 +67,8 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 //				        	// switch to the send screen...
 				    }
 //				    
-						
+
+					    
 						
 						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
 						mPager = (ViewPager)findViewById(R.id.pager);
