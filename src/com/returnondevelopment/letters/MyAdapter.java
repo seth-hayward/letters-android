@@ -10,9 +10,11 @@ import android.util.Log;
 public class MyAdapter extends FragmentStatePagerAdapter {
 	
 	static final int ITEMS = 100;
+	static String current_page = "";
 
-	public MyAdapter(FragmentManager fragmentManager) {
+	public MyAdapter(FragmentManager fragmentManager, String page) {
 		super(fragmentManager);
+		current_page = page;
 	}
 	
 	@Override
@@ -23,7 +25,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	@Override
 	public Fragment getItem(int position) {
 						
-		Fragment fragment = new DummySectionFragment("", position);
+		Fragment fragment = new DummySectionFragment(current_page, position);
 		Bundle args = new Bundle();
 		
 		//

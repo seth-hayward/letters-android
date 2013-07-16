@@ -40,9 +40,15 @@ public class DummySectionFragment extends Fragment
 		WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
 		
 		String base_url = "http://www.letterstocrushes.com/mobile/";
+		
+		base_url = base_url + current_page;
+
 		String extension = "";
 		
-		extension = "page/" + Integer.toString(current_page_number);
+		if(current_page_number > 1) {
+			extension = "/page/" + Integer.toString(current_page_number);						
+		}
+						
 		Log.d("Extension", extension);
 		
 		dummyWebView.getSettings().setJavaScriptEnabled(true);
