@@ -7,25 +7,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"    
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical">
-    <LinearLayout
-       android:layout_gravity="fill_horizontal">                          
+    <RelativeLayout
+       android:layout_gravity="fill_horizontal"
+       android:padding="25dp">                          
        <TextView
           android:id="@+id/label_prompt"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Write your letter." />
+          android:text="Write your letter."
+          />
        <Button
           android:id="@+id/btn_send"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Send" />        
-    </LinearLayout>
+          android:text="Send"
+          android:layout_alignParentRight="true" />        
+    </RelativeLayout>
     <LinearLayout  
-          android:layout_gravity="fill_horizontal">                    
+          android:layout_gravity="fill_horizontal"
+          android:padding="25dp">
           <EditText
             android:id="@+id/text_Letter"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:inputType="textMultiLine"
             />    
     </LinearLayout>
