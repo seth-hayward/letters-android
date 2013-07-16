@@ -60,8 +60,10 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 				        case 3:
 				        	current_page = "search";
 				        	break;
-//				        case 4:
-//				        	// switch to the send screen...
+				        case 4:
+				        	// switch to the send screen...
+				        	current_page = "send";
+				        	break;
 				    }
 				    
 					    						
