@@ -12,7 +12,8 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 
-public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener {
+public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener,
+	SendFragment.OnLetterSentListener {
 	
 	MyAdapter mAdapter;
 	ViewPager mPager;
@@ -124,5 +125,16 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	public boolean onNavigationItemSelected(int arg0, long arg1) {
 		return false;
 	}
+
+	@Override
+	public void onLetterSend(int id) {
+		// TODO Auto-generated method stub
+		mAdapter = new MyAdapter(getSupportFragmentManager(), "letter/" + Integer.toString(id));		
+		mPager = (ViewPager)findViewById(R.id.pager);
+		mPager.setAdapter(mAdapter);
+		
+		mPager.setCurrentItem(1);
+	}
+
 		
 }
