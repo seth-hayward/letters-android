@@ -72,16 +72,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
 						mPager = (ViewPager)findViewById(R.id.pager);
 						mPager.setAdapter(mAdapter);
-						
-						mPager.setCurrentItem(0);
-								
-						// Set up the action bar.						
-						
-						View rootView = mPager.getRootView();		
-						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
-												
-						current_page_number = 1;
-																		
+																																
 					    Log.d("CurrentPage", current_page + " - " + Integer.toString(spinner_position));
 
 					    return true;
