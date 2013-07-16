@@ -16,6 +16,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	public MyAdapter(FragmentManager fragmentManager, String page) {
 		super(fragmentManager);
 		current_page = page;
+		current_page_number = -1;
 	}
 	
 	@Override

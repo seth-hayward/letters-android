@@ -26,9 +26,12 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		setContentView(R.layout.activity_letters);
 
 		mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
+		
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
 				
+		
+		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);    
@@ -67,15 +70,14 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 //				        	// switch to the send screen...
 				    }
 //				    
-
-					    
-						
+					    						
 						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
 						mPager = (ViewPager)findViewById(R.id.pager);
 						mPager.setAdapter(mAdapter);
 						
+						mPager.setCurrentItem(1);
 																																
-					    Log.d("CurrentPage", current_page + " - " + Integer.toString(spinner_position));
+					    Log.d("CurrentPage", current_page + " - " + Integer.toString(spinner_position) + " - /" + mAdapter.getCount());
 
 					    return true;
 												
