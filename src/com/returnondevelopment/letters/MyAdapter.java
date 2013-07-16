@@ -1,7 +1,5 @@
 package com.returnondevelopment.letters;
 
-import android.app.ActionBar;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -41,13 +39,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 		} else {
 			fragment = new WebViewFragment(current_page, current_page_number);					
 		}
-		
-		//
-		// hok, can i somehow get the action bar from here?
-		//
-					
-		//args.putInt(DummySectionFragment.current_page, position + 1);
-		//fragment.setArguments(args);									
+			
 		return fragment;
 	}
 }
