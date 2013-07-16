@@ -41,32 +41,45 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 					@Override
 					public boolean onNavigationItemSelected(int spinner_position, long arg1) {
 												
+						
+						// RECREATE
+						// THE 
+						// FRAGMENT
+						
+						mAdapter = new MyAdapter(getSupportFragmentManager());		
+						mPager = (ViewPager)findViewById(R.id.pager);
+						mPager.setAdapter(mAdapter);
+						
+						mPager.setCurrentItem(0);
+								
+						// Set up the action bar.						
+						
 						View rootView = mPager.getRootView();		
 						WebView dummyWebView = (WebView) rootView.findViewById(R.id.section_webView);
-												
-						current_page_number = 1;
-																		
-					    switch (spinner_position) {
-					        case 0:	        	
-					        	current_page = "";
-					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		  
-					        	break;
-					        case 1:
-					        	current_page = "more";					        	
-					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
-					        	break;
-					        case 2:
-					        	current_page = "bookmarks";					        	
-					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
-					        	break;
-					        case 3:
-					        	current_page = "search";
-					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
-					        	break;
-					        case 4:
-					        	// switch to the send screen...
-					    }
-					    
+//												
+//						current_page_number = 1;
+//																		
+//					    switch (spinner_position) {
+//					        case 0:	        	
+//					        	current_page = "";
+//					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		  
+//					        	break;
+//					        case 1:
+//					        	current_page = "more";					        	
+//					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
+//					        	break;
+//					        case 2:
+//					        	current_page = "bookmarks";					        	
+//					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
+//					        	break;
+//					        case 3:
+//					        	current_page = "search";
+//					        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
+//					        	break;
+//					        case 4:
+//					        	// switch to the send screen...
+//					    }
+//					    
 					    Log.d("CurrentPage", current_page + " - " + Integer.toString(spinner_position));
 
 					    return true;

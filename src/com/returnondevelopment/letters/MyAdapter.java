@@ -9,7 +9,7 @@ import android.util.Log;
 
 public class MyAdapter extends FragmentStatePagerAdapter {
 	
-	static final int ITEMS = 3;
+	static final int ITEMS = 100;
 
 	public MyAdapter(FragmentManager fragmentManager) {
 		super(fragmentManager);
@@ -22,18 +22,16 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	
 	@Override
 	public Fragment getItem(int position) {
-		Fragment fragment = new DummySectionFragment();
+						
+		Fragment fragment = new DummySectionFragment("", position);
 		Bundle args = new Bundle();
 		
 		//
 		// hok, can i somehow get the action bar from here?
 		//
-
-		
-		Log.d("getItem", Integer.toString(position));
-		
-		args.putInt(DummySectionFragment.current_page, position + 1);
-		fragment.setArguments(args);									
+					
+		//args.putInt(DummySectionFragment.current_page, position + 1);
+		//fragment.setArguments(args);									
 		return fragment;
 	}
 }

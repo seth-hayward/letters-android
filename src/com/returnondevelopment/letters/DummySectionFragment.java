@@ -26,7 +26,9 @@ public class DummySectionFragment extends Fragment
 	public static String current_page = "";
 	public static int current_page_number = 1;
 
-	public DummySectionFragment() {
+	public DummySectionFragment(String page, int page_number) {
+		current_page = page;
+		current_page_number = page_number;
 	}
 
 	@Override
@@ -41,6 +43,7 @@ public class DummySectionFragment extends Fragment
 		String extension = "";
 		
 		extension = "page/" + Integer.toString(current_page_number);
+		Log.d("Extension", extension);
 		
 		dummyWebView.getSettings().setJavaScriptEnabled(true);
 
