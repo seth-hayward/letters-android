@@ -30,8 +30,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
 				
-		
-		
 		// Set up the action bar.
 		final ActionBar actionBar = getActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);    
@@ -52,24 +50,20 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 					    switch (spinner_position) {
 				        case 0:	        	
 				        	current_page = "";
-//				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/page/1");	        		  
 				        	break;
 				        case 1:
 				        	current_page = "more/";					        	
-//				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/more/page/1");	        		        	
 				        	break;
 				        case 2:
 				        	current_page = "bookmarks";					        	
-//				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/bookmarks");  	
-//				        	break;
+				        	break;
 				        case 3:
 				        	current_page = "search";
-//				        	dummyWebView.loadUrl("http://www.letterstocrushes.com/mobile/search");  	
-//				        	break;
+				        	break;
 //				        case 4:
 //				        	// switch to the send screen...
 				    }
-//				    
+				    
 					    						
 						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
 						mPager = (ViewPager)findViewById(R.id.pager);

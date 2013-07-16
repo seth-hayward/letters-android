@@ -35,7 +35,7 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 			current_page_number = position;			
 		}
 				
-		Fragment fragment = new DummySectionFragment(current_page, current_page_number);		
+		Fragment fragment = new WebViewFragment(current_page, current_page_number);		
 		
 		//
 		// hok, can i somehow get the action bar from here?

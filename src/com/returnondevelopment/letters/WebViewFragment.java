@@ -16,7 +16,7 @@ import android.support.v4.app.Fragment;
  * A dummy fragment representing a section of the app, but that simply
  * displays dummy text.
  */
-public class DummySectionFragment extends Fragment
+public class WebViewFragment extends Fragment
 {
 	/**
 	 * The fragment argument representing the section number for this
@@ -26,7 +26,7 @@ public class DummySectionFragment extends Fragment
 	public static String current_page = "";
 	public static int current_page_number;
 
-	public DummySectionFragment(String page, int page_number) {
+	public WebViewFragment(String page, int page_number) {
 		current_page = page;
 		current_page_number = page_number;
 	}
