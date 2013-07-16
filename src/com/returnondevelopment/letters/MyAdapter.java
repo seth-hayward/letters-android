@@ -34,8 +34,13 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 		} else {
 			current_page_number = position;			
 		}
-				
-		Fragment fragment = new WebViewFragment(current_page, current_page_number);		
+		Fragment fragment;
+								
+		if(current_page == "send") {
+			fragment = new SendFragment();
+		} else {
+			fragment = new WebViewFragment(current_page, current_page_number);					
+		}
 		
 		//
 		// hok, can i somehow get the action bar from here?
