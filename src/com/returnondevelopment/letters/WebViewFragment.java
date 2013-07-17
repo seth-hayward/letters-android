@@ -8,6 +8,8 @@ import com.returnondevelopment.letters.SendFragment.OnLetterSentListener;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -94,15 +96,22 @@ public class WebViewFragment extends Fragment
 	    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-        	
+
+            mCallback = (OnLetterSentListener)view.getContext();
+
+            
+
         	if(url.contains("/edit") == true) {
         		
         		// extract the letter id
-        		String id = url.replace("http://www.letterstocrushes.com/edit/", "");
+        		//String id = url.replace("http://www.letterstocrushes.com/edit/", "");
         		
-        		Log.d("status", "id: " + id);
+        		//Log.d("status", "id: " + id);
         		
-        		mCallback.onLetterPreEdit(id);
+        		//mCallback.onLetterPreEdit(id);
+
+        		Intent intent = new Intent(view.getContext(), SendFragment.class);
+                startActivity(intent);
         		
         		return true;
         	} else {
