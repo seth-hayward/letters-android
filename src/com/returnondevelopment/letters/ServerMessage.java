@@ -7,5 +7,5 @@ public class ServerMessage {
 	public int l_response = 0;
 	public String l_guid;
 	public String l_error_message = "";
-    	
+	public String l_letter_text;
 }
