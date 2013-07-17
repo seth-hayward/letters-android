@@ -54,7 +54,6 @@ public class DownloadWebPageTask extends AsyncTask<String, Void, ServerMessage> 
               try {
                 JSONObject jsonObject = new JSONObject(response);
                 
-                Log.d("status", jsonObject.getString("message"));
                 int response_value = jsonObject.getInt("response");
                 
                 msg.l_response = response_value;
