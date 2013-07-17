@@ -128,7 +128,6 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 
 	@Override
 	public void onLetterSend(int id) {
-		// TODO Auto-generated method stub
 		mAdapter = new MyAdapter(getSupportFragmentManager(), "letter/" + Integer.toString(id));		
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
