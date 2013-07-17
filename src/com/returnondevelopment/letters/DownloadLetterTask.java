@@ -20,7 +20,8 @@ public class DownloadLetterTask extends AsyncTask<String, Void, ServerMessage> {
         String response = "";
         DefaultHttpClient client = new DefaultHttpClient();
         HttpGet httpget = new HttpGet("http://www.letterstocrushes.com/home/getletter/" + url);            
-			               
+        Log.d("status", "hello from downloadlettertask");
+        
         try {
             HttpResponse execute = client.execute(httpget);
             InputStream content = execute.getEntity().getContent();

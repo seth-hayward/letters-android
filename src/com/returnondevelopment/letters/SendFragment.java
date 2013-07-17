@@ -19,6 +19,7 @@ public class SendFragment extends Fragment {
 	public interface OnLetterSentListener {
 		public void onLetterSend(int id, String l_guid);
 		public void onLetterEdit(String letter_message);	
+		public void onLetterPreEdit(String id);
 	}
 	
 	Button button_Send;

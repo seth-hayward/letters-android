@@ -1,6 +1,7 @@
 package com.returnondevelopment.letters;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -201,5 +202,34 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	    super.onStop();
 	    EasyTracker.getInstance().activityStop(this); // Add this method.
 	  }
+
+	@Override
+	public void onLetterPreEdit(String id) {
+		
+		// now download the letter info        		
+		DownloadLetterTask task = new DownloadLetterTask();
+		ServerMessage msg = new ServerMessage();
+		try {
+			msg = task.execute(new String[] { id }).get();					
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			msg.l_response = -1;
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			msg.l_response = -1;					
+		}		    
+		        		
+		// and show the send view
+		
+
+		if(msg.l_response == 1) {
+			
+			// now, show send screen with this stuff...
+			Log.d("status", "getLetter: " + msg.l_letter_text );					
+		}					
+		
+	}
 	
 }

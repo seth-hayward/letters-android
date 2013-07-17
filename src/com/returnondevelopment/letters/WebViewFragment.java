@@ -5,6 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 import com.returnondevelopment.letters.SendFragment.OnLetterSentListener;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -30,14 +31,13 @@ public class WebViewFragment extends Fragment
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	public static String current_page = "";
 	public static int current_page_number;
-	
-	OnLetterSentListener mCallback;
-	
+		
 
 	public WebViewFragment(String page, int page_number) {
 		current_page = page;
 		current_page_number = page_number;
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,7 +90,8 @@ public class WebViewFragment extends Fragment
 			
 
     private class Callback extends WebViewClient{ 
-
+    	OnLetterSentListener mCallback;
+	    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
         	
@@ -101,31 +102,8 @@ public class WebViewFragment extends Fragment
         		
         		Log.d("status", "id: " + id);
         		
-        		// now download the letter info        		
-        		DownloadLetterTask task = new DownloadLetterTask();
-        		ServerMessage msg = new ServerMessage();
-				try {
-					msg = task.execute(id).get();					
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					msg.l_response = -1;
-					e.printStackTrace();
-				} catch (ExecutionException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					msg.l_response = -1;					
-				}		    
-				        		
-        		// and show the send view
-        		        		
-
-				if(msg.l_response == 1) {
-					
-					// now, show send screen with this stuff...
-					Log.d("status", "getLetter: " + msg.l_letter_text );					
-					mCallback.onLetterEdit(msg.l_letter_text);
-				}				
-				
+        		mCallback.onLetterPreEdit(id);
+        		
         		return true;
         	} else {
                 return (false);        		        		
