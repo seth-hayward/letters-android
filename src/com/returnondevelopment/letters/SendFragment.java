@@ -131,17 +131,13 @@ public class SendFragment extends Fragment {
               }
                             
               try {
-                JSONArray jsonArray = new JSONArray(response);
-                Log.d("status",
-                    "Number of entries " + jsonArray.length());
+                JSONObject jsonObject = new JSONObject(response);
                 
-                response += "entries: " + jsonArray.length();
-                for (int i = 0; i < jsonArray.length(); i++) {
-                  JSONObject jsonObject = jsonArray.getJSONObject(i);
-                  Log.d("status", jsonObject.getString("message"));
-                  letter_id = jsonObject.getString("message");
-                  response += " - message:" + letter_id;
-                }
+                Log.d("status", jsonObject.getString("message"));
+                int response_value = jsonObject.getInt("response");
+                
+                letter_id = Integer.toString(jsonObject.getInt("message"));
+                response += " - message:" + letter_id + " - response: " + response_value;
               } catch (Exception e) {
                 response += e.getMessage().toString();
               }
