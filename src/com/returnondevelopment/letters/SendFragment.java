@@ -17,7 +17,7 @@ public class SendFragment extends Fragment {
 
 	// Container activity must implement this interface
 	public interface OnLetterSentListener {
-		public void onLetterSend(int id);	
+		public void onLetterSend(int id, String l_guid);	
 	}
 	
 	Button button_Send;
@@ -62,7 +62,7 @@ public class SendFragment extends Fragment {
 					
 					if(msg.l_response == 1) {
 						Log.d("status", "onClick: " + Integer.toString(msg.l_message));
-						mCallback.onLetterSend(msg.l_message);						
+						mCallback.onLetterSend(msg.l_message, msg.l_guid);						
 					}
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
