@@ -63,7 +63,7 @@ public class DownloadWebPageTask extends AsyncTask<String, Void, ServerMessage> 
                 if(response_value == 1) {
                     letter_id = jsonObject.getInt("message");
                     // show success view and navigate to letter
-                    msg.l_message = response_value;                    
+                    msg.l_message = letter_id;                    
                 } else {
                 	// show error alert view
                 	msg.l_response = 0;

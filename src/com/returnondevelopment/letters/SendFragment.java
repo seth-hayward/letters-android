@@ -89,7 +89,7 @@ public class SendFragment extends Fragment {
 					msg = task.execute(new String[] { text_Letter.getText().toString() }).get();
 					
 					if(msg.l_response == 1) {
-						Log.d("status", Integer.toString(msg.l_message));
+						Log.d("status", "onClick: " + Integer.toString(msg.l_message));
 						mCallback.onLetterSend(msg.l_message);						
 					}
 				} catch (InterruptedException e) {
