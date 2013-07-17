@@ -1,5 +1,10 @@
 package com.returnondevelopment.letters;
 
+import java.util.List;
+
+import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.client.DefaultHttpClient;
+
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.app.ActionBar;
@@ -10,6 +15,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.ArrayAdapter;
 
 public class Letters extends FragmentActivity implements ActionBar.TabListener, OnNavigationListener,
@@ -20,12 +27,14 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	int selected_id = 0;
 	String current_page = "";
 	int current_page_number = 1;
+	private DefaultHttpClient httpClient;
+	public static Cookie cookie = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_letters);
-
+		
 		mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
 		
 		mPager = (ViewPager)findViewById(R.id.pager);
@@ -127,11 +136,26 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	}
 
 	@Override
-	public void onLetterSend(int id) {
+	public void onLetterSend(int id, String guid) {
 		
 		
 		if(id > 1) {
 
+			
+			httpClient = new DefaultHttpClient();
+		    List<Cookie> cookies = httpClient.getCookieStore().getCookies();
+		    for (int i = 0; i < cookies.size(); i++) {
+		        cookie = cookies.get(i);
+		    }		
+			
+			//------- Web Browser activity
+			CookieSyncManager.createInstance(this);
+			CookieManager cookieManager = CookieManager.getInstance();
+			
+		    cookieManager.setCookie("www.letterstocrushes.com", guid + "=1; domain=www.letterstocrushes.com" );
+		    CookieSyncManager.getInstance().sync();
+			
+			
 			mAdapter = new MyAdapter(getSupportFragmentManager(), "letter/" + Integer.toString(id));		
 			mPager = (ViewPager)findViewById(R.id.pager);
 			mPager.setAdapter(mAdapter);
@@ -145,7 +169,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	  @Override
 	  public void onStart() {
 	    super.onStart();
-	    EasyTracker.getInstance().activityStart(this); // Add this method.
+	    EasyTracker.getInstance().activityStart(this); // Add this method.	    
 	  }
 
 	  @Override
