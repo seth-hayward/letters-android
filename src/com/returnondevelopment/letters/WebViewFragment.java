@@ -91,6 +91,13 @@ public class WebViewFragment extends Fragment
         	if(url.contains("/edit") == true) {
         		
         		// now download the letter info
+        		
+        		
+        		
+        		
+        		
+        		
+        		
         		// and show the send view
         		        		
         		return true;

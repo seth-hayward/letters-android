@@ -139,8 +139,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 
 	@Override
 	public void onLetterSend(int id, String guid) {
-		
-		
+				
 		if(id > 1) {
 
     		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
@@ -155,9 +154,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
     		    } });
     		
     		alertDialog.show();
-			
-			
-			
+						
 			httpClient = new DefaultHttpClient();
 		    List<Cookie> cookies = httpClient.getCookieStore().getCookies();
 		    for (int i = 0; i < cookies.size(); i++) {
