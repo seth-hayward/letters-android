@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -40,9 +41,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 public class SendFragment extends Fragment {
-	
 	OnLetterSentListener mCallback;
-	
+
 	// Container activity must implement this interface
 	public interface OnLetterSentListener {
 		public void onLetterSend(int id);	
@@ -52,8 +52,7 @@ public class SendFragment extends Fragment {
 	EditText text_Letter;
 	
 	public SendFragment() {
-		
-		
+				
 	}
 
     @Override
@@ -69,7 +68,6 @@ public class SendFragment extends Fragment {
                     + " must implement OnHeadlineSelectedListener");
         }
     }	
-	
     
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,7 +84,22 @@ public class SendFragment extends Fragment {
 			public void onClick(View arg0) {
 
 				DownloadWebPageTask task = new DownloadWebPageTask();
-			    task.execute(new String[] { text_Letter.getText().toString() });		    
+				ServerMessage msg = new ServerMessage();
+				try {
+					msg = task.execute(new String[] { text_Letter.getText().toString() }).get();
+					
+					if(msg.l_response == 1) {
+						mCallback.onLetterSend(msg.l_message);						
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					msg.l_response = -1;
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					msg.l_response = -1;					
+				}		    
 				
 				
 				 
@@ -99,61 +112,6 @@ public class SendFragment extends Fragment {
     	return sendView;
     }    
 
-    
-    private class DownloadWebPageTask extends AsyncTask<String, Void, String> {
-        protected String doInBackground(String... urls) {
-          String response = "";
-          String letter_id = "-1";
-          for (String url : urls) {
-            DefaultHttpClient client = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");            
-
-            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-		    nameValuePairs.add(new BasicNameValuePair("letterText", url));
-			nameValuePairs.add(new BasicNameValuePair("letterCountry", "US"));
-			nameValuePairs.add(new BasicNameValuePair("mobile", "1"));
-			     
-			try {
-				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			} catch (UnsupportedEncodingException e1) {
-				// TODO Auto-generated catch block
-				response = e1.getMessage().toString();
-			}            
-            
-            try {
-              HttpResponse execute = client.execute(httppost);
-              InputStream content = execute.getEntity().getContent();
-
-              BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-              String s = "";
-              while ((s = buffer.readLine()) != null) {
-                response += s;
-              }
-                            
-              try {
-                JSONObject jsonObject = new JSONObject(response);
-                
-                Log.d("status", jsonObject.getString("message"));
-                int response_value = jsonObject.getInt("response");
-                
-                letter_id = Integer.toString(jsonObject.getInt("message"));
-                response += " - message:" + letter_id + " - response: " + response_value;
-              } catch (Exception e) {
-                response += e.getMessage().toString();
-              }
-
-            } catch (Exception e) {
-				response += e.getMessage().toString();
-            }
-          }
-          return response;
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-          text_Letter.setText(result);
-        }
-      }
     
     
 }
