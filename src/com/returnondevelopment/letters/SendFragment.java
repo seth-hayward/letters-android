@@ -89,6 +89,7 @@ public class SendFragment extends Fragment {
 		    	AlertDialog errorDialog = new AlertDialog.Builder(getActivity()).create();
 		    	AlertDialog successDialog = new AlertDialog.Builder(getActivity()).create();
 
+		    	Log.d("status", "onClick: " + text_Letter.getText().toString());
 			    
 			    try {
 			        // Add your data
@@ -96,14 +97,19 @@ public class SendFragment extends Fragment {
 			    	
 			        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 			        nameValuePairs.add(new BasicNameValuePair("letterText", letter_message));
-			        nameValuePairs.add(new BasicNameValuePair("letterCountry", ""));
+			        nameValuePairs.add(new BasicNameValuePair("letterCountry", "US"));
 			        nameValuePairs.add(new BasicNameValuePair("mobile", "1"));
 			        
 			        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
+			        Log.d("status", "before execute");
+			        
 			        // Execute HTTP Post Request
 			        HttpResponse response = httpclient.execute(httppost);
-			       
+
+			        Log.d("status", "before reader");
+
+			        
 			        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
 			        StringBuilder builder = new StringBuilder();
 			        for (String line = null; (line = reader.readLine()) != null;) {
@@ -116,16 +122,19 @@ public class SendFragment extends Fragment {
 			        int new_letter_id = 0;
 			        boolean success = false;
 
+			        Log.d("status", "before call");
 			        
 			        for(int i = 0; i < finalResult.length(); i++) {
 			        	
 			        	JSONObject row = finalResult.getJSONObject(i);
-			        	
+				        Log.d("status", "get object");
+		        	
 			        	int server_response = row.getInt("response");
 			        	final String server_message = row.getString("message");
 			        	String server_guid = row.getString("guid");
 			        	
 			        	if(server_response == 1) {
+					        Log.d("status", "success");
 
 			        		successDialog.setTitle("error");
 			            	successDialog.setMessage(server_message);
