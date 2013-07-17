@@ -37,7 +37,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_letters);
 		
-		mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
+		mAdapter = new MyAdapter(getSupportFragmentManager(), current_page, "");		
 		
 		mPager = (ViewPager)findViewById(R.id.pager);
 		mPager.setAdapter(mAdapter);
@@ -79,7 +79,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 				    }
 				    
 					    						
-						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page);		
+						mAdapter = new MyAdapter(getSupportFragmentManager(), current_page, "");		
 						mPager = (ViewPager)findViewById(R.id.pager);
 						mPager.setAdapter(mAdapter);
 						
@@ -169,13 +169,24 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		    CookieSyncManager.getInstance().sync();
 			
 			
-			mAdapter = new MyAdapter(getSupportFragmentManager(), "letter/" + Integer.toString(id));		
+			mAdapter = new MyAdapter(getSupportFragmentManager(), "letter/" + Integer.toString(id), "");		
 			mPager = (ViewPager)findViewById(R.id.pager);
 			mPager.setAdapter(mAdapter);
 			
 			mPager.setCurrentItem(1);
 					
 		}
+		
+	}
+	
+	@Override
+	public void onLetterEdit(String letter_message) {
+
+		mAdapter = new MyAdapter(getSupportFragmentManager(), "edit", letter_message);		
+		mPager = (ViewPager)findViewById(R.id.pager);
+		mPager.setAdapter(mAdapter);
+		
+		mPager.setCurrentItem(1);		
 		
 	}
 

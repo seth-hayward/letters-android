@@ -1,6 +1,9 @@
 package com.returnondevelopment.letters;
 
 import java.util.Locale;
+import java.util.concurrent.ExecutionException;
+
+import com.returnondevelopment.letters.SendFragment.OnLetterSentListener;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -27,6 +30,9 @@ public class WebViewFragment extends Fragment
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	public static String current_page = "";
 	public static int current_page_number;
+	
+	OnLetterSentListener mCallback;
+	
 
 	public WebViewFragment(String page, int page_number) {
 		current_page = page;
@@ -90,10 +96,34 @@ public class WebViewFragment extends Fragment
         	
         	if(url.contains("/edit") == true) {
         		
-        		// now download the letter info
+        		// extract the letter id
+        		String id = url.replace("http://www.letterstocrushes.com/edit/", "");
         		
+        		Log.d("status", "id: " + id);
         		
-        		
+        		// now download the letter info        		
+        		DownloadLetterTask task = new DownloadLetterTask();
+        		ServerMessage msg = new ServerMessage();
+				try {
+					msg = task.execute(id).get();
+					
+					if(msg.l_response == 1) {
+						
+						// now, show send screen with this stuff...
+						
+						
+						Log.d("status", "getLetter: " + msg.l_letter_text );
+					}
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					msg.l_response = -1;
+					e.printStackTrace();
+				} catch (ExecutionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					msg.l_response = -1;					
+				}		    
+				        		
         		
         		
         		

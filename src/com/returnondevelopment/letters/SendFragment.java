@@ -17,14 +17,18 @@ public class SendFragment extends Fragment {
 
 	// Container activity must implement this interface
 	public interface OnLetterSentListener {
-		public void onLetterSend(int id, String l_guid);	
+		public void onLetterSend(int id, String l_guid);
+		public void onLetterEdit(String letter_message);	
 	}
 	
 	Button button_Send;
 	EditText text_Letter;
+	boolean _is_edit;
+	String _letter_message;
 	
-	public SendFragment() {
-				
+	public SendFragment(boolean is_edit, String letter_message) {
+		_is_edit = is_edit;
+		_letter_message = letter_message;
 	}
 
     @Override
@@ -50,6 +54,14 @@ public class SendFragment extends Fragment {
     	
 		button_Send = (Button)sendView.findViewById(R.id.btn_send);
 		text_Letter = (EditText)sendView.findViewById(R.id.text_Letter);
+		
+		if(_is_edit) {
+			text_Letter.setText(_letter_message);						
+			button_Send.setText("Edit");
+		} else {
+			button_Send.setText("Send");			
+		}
+			
 		button_Send.setOnClickListener(new OnClickListener() {
 
 			@Override

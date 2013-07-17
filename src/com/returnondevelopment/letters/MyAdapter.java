@@ -9,12 +9,15 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 	
 	static final int ITEMS = 100;
 	static String current_page = "";
+	static String current_letter_message;
 	static int current_page_number = -1;
+	
 
-	public MyAdapter(FragmentManager fragmentManager, String page) {
+	public MyAdapter(FragmentManager fragmentManager, String page, String letter_message) {
 		super(fragmentManager);
 		current_page = page;
 		current_page_number = -1;
+		current_letter_message = letter_message;
 	}
 	
 	@Override
@@ -35,7 +38,9 @@ public class MyAdapter extends FragmentStatePagerAdapter {
 		Fragment fragment;
 								
 		if(current_page == "send") {
-			fragment = new SendFragment();
+			fragment = new SendFragment(false, "");
+		} else if(current_page == "edit") {
+			fragment = new SendFragment(true, current_letter_message);
 		} else {
 			fragment = new WebViewFragment(current_page, current_page_number);					
 		}
