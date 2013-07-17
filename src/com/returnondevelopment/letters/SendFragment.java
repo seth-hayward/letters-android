@@ -86,7 +86,7 @@ public class SendFragment extends Fragment {
 			public void onClick(View arg0) {
 
 				DownloadWebPageTask task = new DownloadWebPageTask();
-			    task.execute(new String[] { "http://www.vogella.de" });		    
+			    task.execute(new String[] { text_Letter.getText().toString() });		    
 				
 				
 				 
@@ -98,88 +98,49 @@ public class SendFragment extends Fragment {
     	
     	return sendView;
     }    
+
     
     private class DownloadWebPageTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
           String response = "";
           for (String url : urls) {
             DefaultHttpClient client = new DefaultHttpClient();
-            
+            HttpPost httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");            
 
-	    	AlertDialog errorDialog = new AlertDialog.Builder(getActivity()).create();
-	    	AlertDialog successDialog = new AlertDialog.Builder(getActivity()).create();            
-            
-	        // Add your data
-	    	String letter_message = text_Letter.getText().toString();
-	    	
-	        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
-	        nameValuePairs.add(new BasicNameValuePair("letterText", letter_message));
-	        nameValuePairs.add(new BasicNameValuePair("letterCountry", "US"));
-	        nameValuePairs.add(new BasicNameValuePair("mobile", "1"));
-
-		    HttpPost httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");
-	        try {
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
+		    nameValuePairs.add(new BasicNameValuePair("letterText", url));
+			nameValuePairs.add(new BasicNameValuePair("letterCountry", "US"));
+			nameValuePairs.add(new BasicNameValuePair("mobile", "1"));
+			     
+			try {
 				httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			} catch (UnsupportedEncodingException e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-                      
+				response = e1.getMessage().toString();
+			}            
+            
             try {
               HttpResponse execute = client.execute(httppost);
-              
-		        Log.d("status", "before reader");
+              InputStream content = execute.getEntity().getContent();
 
-
-		        InputStream content = execute.getEntity().getContent();
-
-		          BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-		          String s = "";
-		          while ((s = buffer.readLine()) != null) {
-		            response += s;
-		          }		        
-		        		          
-//		        BufferedReader reader = new BufferedReader(new InputStreamReader(execute.getEntity().getContent(), "UTF-8"));
-//		        StringBuilder builder = new StringBuilder();
-//		        for (String line = null; (line = reader.readLine()) != null;) {
-//		        	builder.append(line).append("\n");
-//		        }
-//		        JSONTokener tokener = new JSONTokener(builder.toString());
-//		        JSONArray finalResult = new JSONArray(tokener);
-//
-//		        return builder.toString();
-		        
-//		        // this is awful
-//		        int new_letter_id = 0;
-//		        boolean success = false;
-//
-//		        Log.d("status", "before call");
-//		        
-//		        for(int i = 0; i < finalResult.length(); i++) {
-//		        	
-//		        	JSONObject row = finalResult.getJSONObject(i);
-//			        Log.d("status", "get object");
-//	        	
-//		        	int server_response = row.getInt("response");
-//		        	final String server_message = row.getString("message");
-//		        	String server_guid = row.getString("guid");
-//
-//		        	response = server_message;
-//		        	
-//		        }
+              BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+              String s = "";
+              while ((s = buffer.readLine()) != null) {
+                response += s;
+              }
 
             } catch (Exception e) {
-              e.printStackTrace();
-              text_Letter.setText(e.getMessage());
+				response = e.getMessage().toString();
             }
           }
           return response;
         }
 
+        @Override
         protected void onPostExecute(String result) {
           text_Letter.setText(result);
         }
       }
     
-		 
+    
 }
