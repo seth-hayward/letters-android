@@ -103,6 +103,7 @@ public class SendFragment extends Fragment {
     private class DownloadWebPageTask extends AsyncTask<String, Void, String> {
         protected String doInBackground(String... urls) {
           String response = "";
+          String letter_id = "-1";
           for (String url : urls) {
             DefaultHttpClient client = new DefaultHttpClient();
             HttpPost httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");            
@@ -128,9 +129,25 @@ public class SendFragment extends Fragment {
               while ((s = buffer.readLine()) != null) {
                 response += s;
               }
+                            
+              try {
+                JSONArray jsonArray = new JSONArray(response);
+                Log.d("status",
+                    "Number of entries " + jsonArray.length());
+                
+                response += "entries: " + jsonArray.length();
+                for (int i = 0; i < jsonArray.length(); i++) {
+                  JSONObject jsonObject = jsonArray.getJSONObject(i);
+                  Log.d("status", jsonObject.getString("message"));
+                  letter_id = jsonObject.getString("message");
+                  response += " - message:" + letter_id;
+                }
+              } catch (Exception e) {
+                response += e.getMessage().toString();
+              }
 
             } catch (Exception e) {
-				response = e.getMessage().toString();
+				response += e.getMessage().toString();
             }
           }
           return response;
