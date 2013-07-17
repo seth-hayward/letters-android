@@ -9,6 +9,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class DownloadLetterTask extends AsyncTask<String, Void, ServerMessage> {
 
@@ -29,6 +30,8 @@ public class DownloadLetterTask extends AsyncTask<String, Void, ServerMessage> {
             while ((s = buffer.readLine()) != null) {
               response += s;
             }
+            
+            Log.d("status", "response: " + response);
                           
             try {
               JSONObject jsonObject = new JSONObject(response);

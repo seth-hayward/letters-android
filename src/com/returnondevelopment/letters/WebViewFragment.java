@@ -105,15 +105,7 @@ public class WebViewFragment extends Fragment
         		DownloadLetterTask task = new DownloadLetterTask();
         		ServerMessage msg = new ServerMessage();
 				try {
-					msg = task.execute(id).get();
-					
-					if(msg.l_response == 1) {
-						
-						// now, show send screen with this stuff...
-						
-						
-						Log.d("status", "getLetter: " + msg.l_letter_text );
-					}
+					msg = task.execute(id).get();					
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					msg.l_response = -1;
@@ -124,12 +116,16 @@ public class WebViewFragment extends Fragment
 					msg.l_response = -1;					
 				}		    
 				        		
-        		
-        		
-        		
-        		
         		// and show the send view
         		        		
+
+				if(msg.l_response == 1) {
+					
+					// now, show send screen with this stuff...
+					Log.d("status", "getLetter: " + msg.l_letter_text );					
+					mCallback.onLetterEdit(msg.l_letter_text);
+				}				
+				
         		return true;
         	} else {
                 return (false);        		        		
