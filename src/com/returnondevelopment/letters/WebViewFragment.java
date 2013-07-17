@@ -2,6 +2,8 @@ package com.returnondevelopment.letters;
 
 import java.util.Locale;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -85,7 +87,17 @@ public class WebViewFragment extends Fragment
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            return (false);
+        	
+        	if(url.contains("/edit") == true) {
+        		
+        		// now download the letter info
+        		// and show the send view
+        		        		
+        		return true;
+        	} else {
+                return (false);        		        		
+        	}
+        	        	
         }
 
     }

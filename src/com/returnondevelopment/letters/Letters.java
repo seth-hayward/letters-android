@@ -8,8 +8,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import com.google.analytics.tracking.android.EasyTracker;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ActionBar.OnNavigationListener;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -141,6 +143,20 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		
 		if(id > 1) {
 
+    		AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+    		alertDialog.setTitle("Send successful");
+    		alertDialog.setMessage("Your letter was sent.");
+
+    		alertDialog.setButton("Yay", new DialogInterface.OnClickListener() {
+    		      public void onClick(DialogInterface dialog, int which) {
+    		 
+    		       //here you can add functions
+    		 
+    		    } });
+    		
+    		alertDialog.show();
+			
+			
 			
 			httpClient = new DefaultHttpClient();
 		    List<Cookie> cookies = httpClient.getCookieStore().getCookies();
