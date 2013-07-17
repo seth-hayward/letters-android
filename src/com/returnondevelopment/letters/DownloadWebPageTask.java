@@ -16,7 +16,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class DownloadWebPageTask extends AsyncTask<String, Void, ServerMessage> {
     	
