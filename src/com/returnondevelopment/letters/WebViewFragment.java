@@ -7,6 +7,7 @@ import com.returnondevelopment.letters.SendFragment.OnLetterSentListener;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -35,7 +36,7 @@ public class WebViewFragment extends Fragment
 	public static String current_page = "";
 	public static int current_page_number;
 
-	OnLetterSentListener mCallback;
+	public OnLetterSentListener mCallback;
 	
 	
 	public WebViewFragment(String page, int page_number) {
@@ -84,7 +85,7 @@ public class WebViewFragment extends Fragment
 
 		dummySettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		
-		Callback cb = new Callback();
+		Callback cb = new Callback(this);
 		cb.callback = new WebViewCallback() {
 
 			@Override
@@ -124,6 +125,11 @@ public class WebViewFragment extends Fragment
     private class Callback extends WebViewClient { 
     	public WebViewCallback callback;
     	    	
+    	WebViewFragment _fragment;
+    	public Callback(WebViewFragment frag) {
+    		_fragment = frag;    		
+    	}
+    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
                     	
@@ -132,8 +138,10 @@ public class WebViewFragment extends Fragment
         		// extract the letter id
         		String id = url.replace("http://www.letterstocrushes.com/edit/", "");
         		
-        		Log.d("status", "id, before callback.callbackCall(id): " + id);
+       		Log.d("status", "id, before _fragment.mcallback: " + id);
         		callback.callbackCall(id);
+        		
+//        		_fragment.mCallback.onLetterPreEdit(id);
         		
         		return true;
         	} else {

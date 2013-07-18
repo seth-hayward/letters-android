@@ -206,9 +206,13 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 	@Override
 	public void onLetterPreEdit(String id) {
 		
+		Log.d("status", "onLetterPreEdit: " + id);
+		
 		// now download the letter info        		
 		DownloadLetterTask task = new DownloadLetterTask();
 		ServerMessage msg = new ServerMessage();
+		
+		Log.d("status", "called new task, about to execute");
 		try {
 			msg = task.execute(new String[] { id }).get();					
 		} catch (InterruptedException e) {
