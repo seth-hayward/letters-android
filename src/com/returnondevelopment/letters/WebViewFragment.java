@@ -24,7 +24,8 @@ import android.support.v4.app.Fragment;
  * A dummy fragment representing a section of the app, but that simply
  * displays dummy text.
  */
-public class WebViewFragment extends Fragment
+
+public class WebViewFragment extends Fragment implements WebViewCallback
 {
 	/**
 	 * The fragment argument representing the section number for this
@@ -33,7 +34,9 @@ public class WebViewFragment extends Fragment
 	public static final String ARG_SECTION_NUMBER = "section_number";
 	public static String current_page = "";
 	public static int current_page_number;
-		
+
+	WebViewCallback callback;
+	
 
 	public WebViewFragment(String page, int page_number) {
 		current_page = page;
@@ -91,9 +94,13 @@ public class WebViewFragment extends Fragment
 	}		
 			
 
-    private class Callback extends WebViewClient{ 
-    	OnLetterSentListener mCallback;
-	    	
+    private class Callback extends WebViewClient { 
+	    
+    	
+    	public void callbackCall() {
+    		
+    	}
+    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
@@ -108,10 +115,7 @@ public class WebViewFragment extends Fragment
         		
         		//Log.d("status", "id: " + id);
         		
-        		//mCallback.onLetterPreEdit(id);
-
-        		Intent intent = new Intent(view.getContext(), SendFragment.class);
-                startActivity(intent);
+        		mCallback.onLetterPreEdit(id);
         		
         		return true;
         	} else {
