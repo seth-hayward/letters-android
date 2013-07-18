@@ -214,7 +214,7 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		
 		Log.d("status", "called new task, about to execute");
 		try {
-			msg = task.execute(new String[] { id }).get();					
+			msg = task.execute(new String(id)).get();					
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			msg.l_response = -1;

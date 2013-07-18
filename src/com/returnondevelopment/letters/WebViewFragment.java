@@ -92,7 +92,7 @@ public class WebViewFragment extends Fragment
 			public void callbackCall(String id) {
 				// TODO Auto-generated method stub
 				Log.d("status", "callbackCall fired with id= " + id);
-				mCallback.onLetterPreEdit(id);
+				mCallback.onLetterPreEdit(new String(id));
 			}
 			
 		};
