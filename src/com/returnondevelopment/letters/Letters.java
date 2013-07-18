@@ -226,6 +226,11 @@ public class Letters extends FragmentActivity implements ActionBar.TabListener, 
 		}		    
 		        		
 		// and show the send view
+		mAdapter = new MyAdapter(getSupportFragmentManager(), "edit", msg.l_letter_text);		
+		mPager = (ViewPager)findViewById(R.id.pager);
+		mPager.setAdapter(mAdapter);
+		
+		mPager.setCurrentItem(1);		
 		
 
 		if(msg.l_response == 1) {
