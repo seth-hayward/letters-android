@@ -24,10 +24,25 @@ public class DownloadWebPageTask extends AsyncTask<String, Void, ServerMessage> 
           ServerMessage msg = new ServerMessage();          
           String response = "";
           int letter_id = -1;
+          
+          boolean is_edit = false;
+          
+          if (urls.length > 1) {
+        	  if(urls[1] == "edit") {
+        		  is_edit = true;        		  
+        	  }
+          }
+          
           for (String url : urls) {
             DefaultHttpClient client = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");            
-
+            HttpPost httppost;
+            
+            if(is_edit) {             	
+            	httppost = new HttpPost("http://www.letterstocrushes.com/home/EditLetter");
+            } else {
+            	httppost = new HttpPost("http://www.letterstocrushes.com/home/mail");            
+            }
+            
             List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(3);
 		    nameValuePairs.add(new BasicNameValuePair("letterText", url));
 			nameValuePairs.add(new BasicNameValuePair("letterCountry", "US"));
