@@ -35,13 +35,27 @@ public class WebViewFragment extends Fragment implements WebViewCallback
 	public static String current_page = "";
 	public static int current_page_number;
 
-	WebViewCallback callback;
+	OnLetterSentListener mCallback;
 	
-
+	
 	public WebViewFragment(String page, int page_number) {
 		current_page = page;
 		current_page_number = page_number;
 	}
+	
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        
+        // This makes sure that the container activity has implemented
+        // the callback interface. If not, it throws an exception
+        try {
+            mCallback = (OnLetterSentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+    }		
 	
 
 	@Override
@@ -69,6 +83,8 @@ public class WebViewFragment extends Fragment implements WebViewCallback
 		WebSettings dummySettings = dummyWebView.getSettings();
 
 		dummySettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+		
+				
 		dummyWebView.setWebViewClient(new Callback()); 
 		dummyWebView.loadUrl(base_url + extension);
 					
@@ -95,27 +111,18 @@ public class WebViewFragment extends Fragment implements WebViewCallback
 			
 
     private class Callback extends WebViewClient { 
-	    
-    	
-    	public void callbackCall() {
-    		
-    	}
-    	
+    	WebViewCallback callback;
+    	    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            mCallback = (OnLetterSentListener)view.getContext();
-
-            
-
+                    	
         	if(url.contains("/edit") == true) {
         		
         		// extract the letter id
-        		//String id = url.replace("http://www.letterstocrushes.com/edit/", "");
+        		String id = url.replace("http://www.letterstocrushes.com/edit/", "");
         		
         		//Log.d("status", "id: " + id);
-        		
-        		mCallback.onLetterPreEdit(id);
+        		callback.callbackCall(id);
         		
         		return true;
         	} else {
@@ -125,6 +132,13 @@ public class WebViewFragment extends Fragment implements WebViewCallback
         }
 
     }
+
+
+	@Override
+	public void callbackCall(String id) {
+		// TODO Auto-generated method stub
+		mCallback.onLetterPreEdit(id);
+	}
 
 }
 	
