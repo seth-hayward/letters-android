@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class SendFragment extends Fragment {
 	OnLetterSentListener mCallback;
@@ -24,6 +25,7 @@ public class SendFragment extends Fragment {
 	
 	Button button_Send;
 	EditText text_Letter;
+	TextView label_Prompt;
 	boolean _is_edit;
 	String _letter_message;
 	
@@ -55,12 +57,15 @@ public class SendFragment extends Fragment {
     	
 		button_Send = (Button)sendView.findViewById(R.id.btn_send);
 		text_Letter = (EditText)sendView.findViewById(R.id.text_Letter);
+		label_Prompt = (TextView)sendView.findViewById(R.id.label_prompt);
 		
 		if(_is_edit) {
 			text_Letter.setText(_letter_message);						
 			button_Send.setText("Edit");
+			label_Prompt.setText("Edit your letter.");
 		} else {
 			button_Send.setText("Send");			
+			label_Prompt.setText("Write your letter.");
 		}
 			
 		button_Send.setOnClickListener(new OnClickListener() {
