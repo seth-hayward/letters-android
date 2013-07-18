@@ -25,7 +25,7 @@ import android.support.v4.app.Fragment;
  * displays dummy text.
  */
 
-public class WebViewFragment extends Fragment implements WebViewCallback
+public class WebViewFragment extends Fragment
 {
 	/**
 	 * The fragment argument representing the section number for this
@@ -84,8 +84,19 @@ public class WebViewFragment extends Fragment implements WebViewCallback
 
 		dummySettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		
-				
-		dummyWebView.setWebViewClient(new Callback()); 
+		Callback cb = new Callback();
+		cb.callback = new WebViewCallback() {
+
+			@Override
+			public void callbackCall(String id) {
+				// TODO Auto-generated method stub
+				Log.d("status", "callbackCall fired with id= " + id);
+				mCallback.onLetterPreEdit(id);
+			}
+			
+		};
+						
+		dummyWebView.setWebViewClient(cb); 
 		dummyWebView.loadUrl(base_url + extension);
 					
 		return rootView;
@@ -111,7 +122,7 @@ public class WebViewFragment extends Fragment implements WebViewCallback
 			
 
     private class Callback extends WebViewClient { 
-    	WebViewCallback callback;
+    	public WebViewCallback callback;
     	    	
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -121,7 +132,7 @@ public class WebViewFragment extends Fragment implements WebViewCallback
         		// extract the letter id
         		String id = url.replace("http://www.letterstocrushes.com/edit/", "");
         		
-        		//Log.d("status", "id: " + id);
+        		Log.d("status", "id, before callback.callbackCall(id): " + id);
         		callback.callbackCall(id);
         		
         		return true;
@@ -132,13 +143,6 @@ public class WebViewFragment extends Fragment implements WebViewCallback
         }
 
     }
-
-
-	@Override
-	public void callbackCall(String id) {
-		// TODO Auto-generated method stub
-		mCallback.onLetterPreEdit(id);
-	}
 
 }
 	
