@@ -97,7 +97,24 @@ public class SendFragment extends Fragment {
 					
 				} else {
 					// editing an existing letter
-					
+					DownloadWebPageTask task = new DownloadWebPageTask();
+					ServerMessage msg = new ServerMessage();
+					try {
+						msg = task.execute(new String[] { text_Letter.getText().toString(), "edit" }).get();
+						
+						if(msg.l_response == 1) {
+							Log.d("status", "onClick: " + Integer.toString(msg.l_message));
+							mCallback.onLetterSend(msg.l_message, msg.l_guid);						
+						}
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						msg.l_response = -1;
+						e.printStackTrace();
+					} catch (ExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						msg.l_response = -1;					
+					}		 
 				}
 				
 				
